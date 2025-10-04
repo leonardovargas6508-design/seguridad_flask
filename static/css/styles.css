@@ -1,0 +1,381 @@
+/* Variables para colores y tamaños */
+:root {
+    --primary-color: #4A00E0;
+    --primary-hover: #8E2DE2;
+    --background-gradient-start: #74ebd5;
+    --background-gradient-end: #ACB6E5;
+    --container-bg: rgba(255, 255, 255, 0.95);
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --text-color: #333;
+    --flash-bg: #ffeaa7;
+    --flash-border: #fd79a8;
+}
+
+/* Reset básico */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fondo de toda la página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--background-gradient-start), var(--background-gradient-end));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.5;
+    color: var(--text-color);
+    padding: 20px;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 480px;
+    background: var(--container-bg);
+    padding: 35px 45px;
+    border-radius: 18px;
+    box-shadow: 0 25px 50px var(--shadow-color);
+    animation: fadeIn 1s ease-in-out;
+    box-sizing: border-box;
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Títulos */
+h2 {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    font-size: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+
+/* Inputs estilizados */
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 14px 18px;
+    margin: 12px 0;
+    border-radius: 12px;
+    border: 1.5px solid #ddd;
+    font-size: 17px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+    resize: vertical;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(74, 0, 224, 0.6);
+    outline: none;
+}
+
+/* Botones modernos */
+input[type="submit"],
+button {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    font-size: 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+    box-shadow: 0 6px 12px rgba(74, 0, 224, 0.4);
+}
+
+input[type="submit"]:hover,
+button:hover,
+input[type="submit"]:focus,
+button:focus {
+    background: var(--primary-hover);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(142, 45, 226, 0.6);
+    outline: none;
+}
+
+/* Enlaces */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 18px;
+    text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 700;
+    transition: color 0.3s ease;
+    font-size: 16px;
+}
+
+a:hover,
+a:focus {
+    color: var(--primary-hover);
+    outline: none;
+}
+
+/* Mensajes flash */
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.flashes li {
+    background: var(--flash-bg);
+    color: #2d3436;
+    padding: 12px 18px;
+    border-left: 6px solid var(--flash-border);
+    border-radius: 6px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.12);
+}
+
+/* Página de perfil con imagen */
+.profile-container {
+    background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1000&q=80') no-repeat center center;
+    background-size: cover;
+    padding: 80px 50px;
+    border-radius: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.35);
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.75);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fondo oscuro sutil para mejorar legibilidad */
+.profile-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 20px;
+    z-index: 0;
+}
+
+.profile-container > * {
+    position: relative;
+    z-index: 1;
+}
+
+.profile-container h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+/* Botón de cerrar sesión */
+.profile-container a {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 17px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.profile-container a:hover,
+.profile-container a:focus {
+    background: rgba(0, 0, 0, 0.85);
+    transform: translateY(-3px);
+    outline: none;
+}
+
+/* Imagen de bienvenida más grande y estilizada */
+.welcome-img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.welcome-img:hover,
+.welcome-img:focus {
+    transform: scale(1.05);
+    outline: none;
+}
+
+/* Formularios centrados */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Menú desplegable moderno */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--container-bg);
+    padding: 12px 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px var(--shadow-color);
+    position: relative;
+    user-select: none;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--primary-color);
+    user-select: none;
+}
+
+.menu-toggle {
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    font-size: 26px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    user-select: none;
+}
+
+.menu-toggle:hover,
+.menu-toggle:focus {
+    background: var(--primary-hover);
+    outline: none;
+}
+
+.nav-links {
+    list-style: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background: var(--container-bg);
+    border-radius: 15px;
+    box-shadow: 0 15px 30px var(--shadow-color);
+    width: 180px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    z-index: 10;
+}
+
+.nav-links.show {
+    max-height: 300px;
+    padding: 15px 0;
+}
+
+.nav-links li {
+    margin: 0;
+}
+
+.nav-links li + li {
+    border-top: 1px solid #ddd;
+}
+
+.nav-links a {
+    display: block;
+    padding: 12px 25px;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 0 0 0 0;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background: var(--primary-hover);
+    color: white;
+    outline: none;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .navbar {
+        padding: 15px 40px;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .nav-links {
+        position: static;
+        display: flex;
+        max-height: none;
+        padding: 0;
+        box-shadow: none;
+        width: auto;
+        overflow: visible;
+    }
+
+    .nav-links li + li {
+        border-top: none;
+        margin-left: 30px;
+    }
+
+    .nav-links a {
+        padding: 8px 0;
+        color: var(--primary-color);
+        font-weight: 600;
+        border-radius: 0;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+        background: transparent;
+        color: var(--primary-hover);
+    }
+}
+
+@media (max-width: 480px) {
+    .container,
+    .profile-container {
+        padding: 25px 30px;
+        border-radius: 14px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .profile-container h2 {
+        font-size: 28px;
+    }
+
+    .welcome-img {
+        width: 140px;
+        height: 140px;
+        margin-bottom: 25px;
+    }
+}
+

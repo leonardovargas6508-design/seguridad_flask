@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<div class="profile-wrapper">
+    <nav class="navbar" role="navigation" aria-label="Menú principal">
+        <div class="logo" aria-label="Logo de Flask Seguridad">🔒 Flask Seguridad</div>
+        <button 
+            class="menu-toggle" 
+            aria-expanded="false" 
+            aria-controls="nav-links" 
+            aria-label="Alternar menú"
+            id="menu-toggle-btn"
+            type="button"
+        >
+            ☰
+        </button>
+        <ul class="nav-links" id="nav-links" hidden>
+            <li><a href="#" tabindex="0">Inicio</a></li>
+            <li><a href="{{ url_for('profile') }}" tabindex="0">Perfil</a></li>
+            <li><a href="{{ url_for('logout') }}" tabindex="0">Cerrar sesión</a></li>
+        </ul>
+    </nav>
+
+    <main class="profile-container" role="main">
+        <img 
+            src="{{ url_for('static', filename='40c29437-64df-4573-a0e8-1c70d0e9a2c1.png') }}" 
+            alt="Imagen de bienvenida" 
+            class="welcome-img" 
+            loading="lazy"
+            tabindex="0"
+        >
+        <h2>Hola, {{ username }}!</h2>
+        <p>¡Accediste a una página protegida!</p>
+        <a href="{{ url_for('logout') }}" class="btn-logout" role="button">Cerrar sesión</a>
+    </main>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const toggleBtn = document.getElementById('menu-toggle-btn');
+        const navLinks = document.getElementById('nav-links');
+
+        toggleBtn.addEventListener('click', () => {
+            const isHidden = navLinks.hasAttribute('hidden');
+
+            if (isHidden) {
+                navLinks.removeAttribute('hidden');
+                navLinks.classList.add('show');
+                toggleBtn.setAttribute('aria-expanded', 'true');
+            } else {
+                navLinks.setAttribute('hidden', '');
+                navLinks.classList.remove('show');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Cerrar menú al hacer clic fuera (opcional)
+        document.addEventListener('click', (event) => {
+            if (!navLinks.contains(event.target) && !toggleBtn.contains(event.target)) {
+                if (!navLinks.hasAttribute('hidden')) {
+                    navLinks.setAttribute('hidden', '');
+                    navLinks.classList.remove('show');
+                    toggleBtn.setAttribute('aria-expanded', 'false');
+                }
+            }
+        });
+
+        // Cerrar menú con tecla Escape (accesibilidad)
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && !navLinks.hasAttribute('hidden')) {
+                navLinks.setAttribute('hidden', '');
+                navLinks.classList.remove('show');
+                toggleBtn.setAttribute('aria-expanded', 'false');
+                toggleBtn.focus();
+            }
+        });
+    });
+</script>
+{% endblock %}
